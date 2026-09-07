@@ -1,0 +1,2 @@
+# Beyond-Rigid-Guidelines-Learning-the-Nuance-of-Real-World-Breast-Cancer-Imaging-Surveillance
+Use this shorter version:  > Code for preprocessing, model training, evaluation, baseline comparison, and visualization for “Beyond Rigid Guidelines: Learning the Nuance of Real-World Breast Cancer Imaging Surveillance.” Includes aggregate results and data-schema documentation; licensed ConcertAI data are not included.
