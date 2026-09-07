@@ -1,0 +1,105 @@
+{
+  "scan_type_order": [
+    "CT",
+    "MRI",
+    "PET",
+    "ULTRASOUND",
+    "XRAY",
+    "MAMMO_TOMO",
+    "NUCLEAR_MED"
+  ],
+  "sequence_interface": {
+    "demographic.csv": {
+      "required": [
+        "patient_id",
+        "gender",
+        "race",
+        "year_of_birth",
+        "date_of_death",
+        "age"
+      ]
+    },
+    "imaging_timeseries.csv": {
+      "required": [
+        "patient_id",
+        "report_date",
+        "sequence",
+        "scan_type_type",
+        "scan_type_vector"
+      ]
+    },
+    "staging_timeseries.csv": {
+      "required": [
+        "patient_id",
+        "stage_date",
+        "stage_group_name",
+        "stage_main",
+        "stage_binary"
+      ]
+    },
+    "mastectomy_timeseries.csv": {
+      "required": ["patient_id", "surgery_date", "surgery_code", "surgery_name"]
+    },
+    "biomarker_timeseries.csv": {
+      "required": [
+        "patient_id",
+        "report_date",
+        "biomarker_name_code",
+        "result_name"
+      ]
+    }
+  },
+  "tabular_interface": {
+    "target_and_history_join_keys": [
+      "patient_id",
+      "anchor_scan_date",
+      "anchor_sequence",
+      "target_sequence"
+    ],
+    "target.csv": {
+      "required": [
+        "patient_id",
+        "anchor_scan_date",
+        "anchor_sequence",
+        "target_sequence",
+        "target_scan_date",
+        "target_scan_type_type",
+        "target_scan_vector",
+        "target_gap_months",
+        "target_interval_months",
+        "target_interval_bin",
+        "history_imaging_count_before_anchor",
+        "age_at_anchor"
+      ]
+    },
+    "demographic.csv": {
+      "join_key": ["patient_id"],
+      "required_or_encoded": ["gender", "race", "year_of_birth", "age"]
+    },
+    "imaging_history.csv": {
+      "column_patterns": [
+        "imaging_t_minus_<n>_scan_vector",
+        "imaging_t_minus_<n>_gap_months_since_previous"
+      ]
+    },
+    "staging_history.csv": {
+      "column_patterns": [
+        "staging_t_minus_<n>_months_before_anchor",
+        "staging_t_minus_<n>_<stage_field>"
+      ]
+    },
+    "mastectomy_history.csv": {
+      "column_patterns": [
+        "mastectomy_t_minus_<n>_months_before_anchor",
+        "mastectomy_t_minus_<n>_<surgery_field>"
+      ]
+    },
+    "biomarker_history.csv": {
+      "column_patterns": [
+        "biomarker_t_minus_<n>_months_before_anchor",
+        "biomarker_t_minus_<n>_<biomarker_field>"
+      ]
+    }
+  },
+  "privacy": "Every realized row conforming to these interfaces is restricted and is not included in this repository."
+}

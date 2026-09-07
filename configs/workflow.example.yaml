@@ -1,0 +1,53 @@
+version: 1
+
+# Required for the full workflow: directory containing the licensed ConcertAI
+# Parquet tables. Use an absolute path in workflow.local.yaml.
+paths:
+  raw_data_dir: ""
+  raw_extract_dir: data/raw_extract
+  sequence_data_dir: data/prepared/multitask
+  tabular_data_dir: data/prepared/multitask_tabular
+  baseline_dir: restricted_artifacts/baselines
+  model_results_dir: restricted_artifacts/results
+  aggregate_results_dir: aggregate_results
+  figures_dir: generated_figures
+
+# Set a stage to false when resuming from outputs produced earlier.
+stages:
+  extract_raw_data: true
+  prepare_sequence_data: true
+  prepare_tabular_data: true
+  run_baselines: true
+  train_models: true
+  match_baselines: true
+  aggregate_results: true
+  generate_figures: true
+
+training:
+  models:
+    - linear
+    - xgboost
+    - mlp
+    - gru
+    - lstm
+    - decoder_transformer
+  feature_sets:
+    - DS
+    - DSI
+    - DSM
+    - DSB
+    - DSIM
+    - DSIB
+    - DSMB
+    - DSIMB
+  hyperband_initial_configs: 36
+  sequence_epochs: 20
+  mlp_final_epochs: 20
+  mlp_trial_epochs: 20
+  mlp_patience: 5
+  xgboost_device: auto
+  xgboost_tree_method: ""
+
+aggregation:
+  bootstrap_repetitions: 1000
+
