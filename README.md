@@ -1,13 +1,43 @@
-# Beyond Rigid Guidelines: Code and Aggregate Results
+# Beyond Rigid Guidelines: Learning the Nuance of Real-World Breast Cancer Imaging Surveillance
 
-This anonymous review repository accompanies the ML4H submission on learning real-world breast-cancer imaging-surveillance decisions. It contains the preprocessing, baseline, model-training, evaluation, aggregation, and plotting code used for the manuscript, together with non-patient-level aggregate results.
+This repository accompanies the manuscript **Beyond Rigid Guidelines: Learning the Nuance of Real-World Breast Cancer Imaging Surveillance**. It contains the preprocessing, baseline, model-training, evaluation, aggregation, and plotting code used for the manuscript, together with non-patient-level aggregate results.
 
-The ConcertAI data are proprietary and are not distributed here. No raw data, patient-level prepared data, prediction rows, dates, identifiers, or model checkpoints are included. Researchers with authorized access to the same licensed data can use the workflow below to reproduce the analysis.
+The data source is **ConcertAI RWD360**, a licensed real-world oncology database. The underlying clinical data and derived patient-level datasets cannot be shared under the data license. This repository provides model-implementation and analysis scripts, input schemas, selected hyperparameters, and manuscript-level aggregate results. Users must obtain their own authorized data access to run preprocessing, training, and patient-level evaluation. See [Data availability](DATA_AVAILABILITY.md).
+
+## Authors
+
+Hanqi Chen, Anthony Girard, Arsh Shah, Rou-Zhen Chen, Winnie Lau, Ravi B. Parikh, Paramita Chatterjee, and Shengpu Tang.
+
+**Affiliation:** Emory University, Atlanta, GA, USA.
+
+## Ethics and IRB
+
+The study used de-identified clinical records from ConcertAI RWD360. **IRB protocol number: [IRB NUMBER TO BE ADDED].**
+
+## Run the analysis notebook without clinical data
+
+Use Python 3.10 and run these commands from this repository's root:
+
+```bash
+python -m pip install -r requirements-analysis.txt
+python -m jupyterlab notebooks/analysis.ipynb
+```
+
+Select **Run All Cells**. [The analysis notebook](notebooks/analysis.ipynb) reads only the included aggregate CSVs, displays Table II, the selected-model subgroup tables and per-scan-type results, and generates Figures 2 and 3 in `generated_figures/`. It does not require patient data, a GPU, or trained models.
+
+For non-interactive execution:
+
+```bash
+python -m nbconvert --to notebook --execute notebooks/analysis.ipynb --output analysis.executed.ipynb --output-dir generated_figures --ExecutePreprocessor.timeout=300
+```
+
+This reproduces presentation of the saved aggregate results. Recomputing metrics, confidence intervals, preprocessing, or training requires the underlying licensed data and restricted model outputs. The original research-workspace notebooks are not part of this public workflow.
 
 ## Repository contents
 
 ```text
-aggregate_results/   Shareable aggregate metrics used in the manuscript
+notebooks/           Runnable aggregate-only analysis notebook
+aggregate_results/   Aggregate metrics used in the manuscript
 configs/             Selected hyperparameters for six models and eight feature sets
 data_schema/         Expected restricted-data interfaces (schema only)
 src/analysis/        Matching, aggregation, evaluation, and plotting code
@@ -16,7 +46,20 @@ src/models/          Linear, XGBoost, MLP, GRU, LSTM, and decoder-only models
 src/preprocessing/   Raw extraction and sequence/tabular data preparation
 ```
 
-## Environment
+## Manuscript figures and tables
+
+| Manuscript item | Repository source | Data needed |
+| --- | --- | --- |
+| Figure 1: multitask framework overview | Conceptual diagram in the manuscript; no figure-generation script is provided | None |
+| Table I: hyperparameter search spaces | Search-space definitions in `src/models/`; selected study configurations in `configs/selected_hyperparameters.json` | None to inspect; licensed inputs to rerun search |
+| Table II: model performance across feature sets | `aggregate_results/table_ii_metrics.csv`; displayed in `notebooks/analysis.ipynb` | Included aggregates to display; restricted predictions to recompute |
+| Table III: XGBoost-DSI subgroup performance | XGBoost-DSI rows in `aggregate_results/table_iii_subgroups.csv`; displayed in the notebook | Included aggregates to display; restricted predictions and staging inputs to recompute |
+| Figure 2: matched interval baseline comparisons | `src/analysis/plot_baseline_comparisons.py`; `guideline_comparison.csv` and `average_comparison.csv` | Included aggregates |
+| Figure 3: feature-group ablation contributions | `src/analysis/plot_feature_contributions.py`; `feature_group_contributions.csv` | Included aggregates |
+
+The notebook also displays the saved GRU-DSIMB subgroup results, per-scan-type precision/recall/F1, and additional metric and confidence-interval columns. These provide supporting analysis beyond the columns shown in the manuscript tables.
+
+## Full model-workflow environment
 
 Python 3.10 was used for the frozen analysis.
 
@@ -47,7 +90,7 @@ paths:
   raw_data_dir: '<PATH_TO_AUTHORIZED_RAW_PARQUET_DIRECTORY>'
 ```
 
-The local configuration is ignored by Git because it may contain a private path. Do not include it when packaging the anonymous submission.
+The local configuration is ignored by Git because it may contain a private path. Keep this local configuration out of the public release.
 
 Training and execution options are configured in the same file. These include the pipeline stages to run, six model types, eight feature sets, initial Hyperband candidate count, sequence and MLP epochs, MLP patience, XGBoost device settings, and bootstrap repetitions. The committed defaults reproduce the study settings.
 
@@ -69,7 +112,7 @@ To use a particular Python environment:
 PYTHON_BIN=/path/to/environment/bin/python bash scripts/run_full_workflow.sh
 ```
 
-Validate all paths, options, and commands without running the analysis:
+Check the configured raw-file presence and print planned commands without executing the stages (this does not validate data contents or model results):
 
 ```bash
 bash scripts/run_full_workflow.sh configs/workflow.local.yaml --dry-run
@@ -228,6 +271,8 @@ feature_group_contributions.csv
 
 The first run performs 1,000 patient-bootstrap repetitions and can take substantial time. Its ignored cache allows interrupted or later runs to continue. If custom restricted locations are used, set `MODEL_RESULTS_DIR`, `MULTITASK_DATA_DIR`, and `MULTITASK_TABULAR_DATA_DIR` before running the script.
 
+This aggregation script targets the original study cohort: it checks for 28,830 held-out events, 4,713 held-out patients, and 330 ultrasound-to-ultrasound comparisons, and expects all 48 model/feature-set results. It is not a general evaluator for arbitrary replacement datasets or partial training runs. Users adapting the model implementations to a different cohort must adapt and validate the study-specific aggregation and subgroup assumptions. Do not disable these checks merely to claim reproduction of the manuscript.
+
 ### 8. Reproduce the manuscript plots
 
 ```bash
@@ -239,7 +284,7 @@ These two plotting scripts require only the shareable files in `aggregate_result
 
 ## Aggregate-only reproduction
 
-Reviewers without ConcertAI access can still reproduce Figures 2 and 3 directly from the included aggregate CSVs:
+Users without ConcertAI access can still reproduce Figures 2 and 3 directly from the included aggregate CSVs:
 
 ```bash
 python src/analysis/plot_baseline_comparisons.py
@@ -250,6 +295,6 @@ python src/analysis/plot_feature_contributions.py
 
 See `DATA_AVAILABILITY.md`. The `.gitignore` is deliberately defensive, but it is not a substitute for manually reviewing every staged file. Never commit `data/`, `restricted_artifacts/`, prediction-detail tables, incorrect-prediction tables, checkpoints, bootstrap caches, dates, or patient identifiers.
 
-## Anonymous-review note
+## Reproducibility and license
 
-This package uses “Anonymous Authors” in the license and contains no repository URL, author identity, affiliation, email address, or local machine path. For a camera-ready release, replace the anonymous metadata, add the final citation or DOI and contact information, and confirm that the data-use agreement permits every released aggregate.
+The code is provided under the [MIT License](LICENSE). That software license grants no rights to the underlying ConcertAI data. The study's selected configurations are recorded in `configs/selected_hyperparameters.json`; the training scripts rerun hyperparameter search, so results may vary with data versions, package versions, and hardware. The saved aggregate CSVs preserve the reported study results.

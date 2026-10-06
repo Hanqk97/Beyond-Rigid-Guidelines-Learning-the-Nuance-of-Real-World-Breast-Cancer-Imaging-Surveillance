@@ -73,7 +73,11 @@ def build_test_examples(data_dir: Path) -> pd.DataFrame:
 
 def find_gru_run(results_dir: Path, setting: str) -> Path:
     pattern = f"gru_tree_multitask_compare_next_scan_data_hyperband_normalized_score_*_{setting}_pid*"
-    candidates = sorted(results_dir.glob(pattern), key=lambda path: path.stat().st_mtime, reverse=True)
+    all_pattern = pattern.replace(f"_{setting}_pid", "_ALL_pid")
+    candidates = sorted(
+        set(results_dir.glob(pattern)) | set(results_dir.glob(all_pattern)),
+        key=lambda path: path.stat().st_mtime, reverse=True,
+    )
     candidates = [path for path in candidates if (path / f"prediction_detail_{setting}.csv").exists()]
     if not candidates:
         raise FileNotFoundError(f"No GRU-{setting} prediction output found under {results_dir}")

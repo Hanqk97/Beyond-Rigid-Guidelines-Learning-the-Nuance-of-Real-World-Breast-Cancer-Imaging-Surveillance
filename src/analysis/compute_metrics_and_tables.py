@@ -40,17 +40,11 @@ pd.set_option('display.max_columns', 100)
 pd.set_option('display.width', 180)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-WORKSPACE_ROOT = PROJECT_ROOT.parent
 restricted_root = Path(
     os.environ.get('RESTRICTED_ARTIFACT_ROOT', PROJECT_ROOT / 'restricted_artifacts')
 ).expanduser().resolve()
-original_frozen_root = WORKSPACE_ROOT / 'Code' / 'arch_0612'
-default_results = original_frozen_root / 'Results'
-default_prepared = original_frozen_root / 'Code' / 'data' / 'prepared'
-if not default_results.exists():
-    default_results = restricted_root / 'results'
-if not default_prepared.exists():
-    default_prepared = restricted_root
+default_results = restricted_root / 'results'
+default_prepared = PROJECT_ROOT / 'data' / 'prepared'
 FROZEN_RESULTS = Path(
     os.environ.get('MODEL_RESULTS_DIR', default_results)
 ).expanduser().resolve()
@@ -706,19 +700,17 @@ MODEL_SPECS = {
 def locate_run(model, setting):
     spec = MODEL_SPECS[model]
     matches = sorted(
-        FROZEN_RESULTS.glob(spec['glob'].format(setting=setting)),
+        set(FROZEN_RESULTS.glob(spec['glob'].format(setting=setting)))
+        | set(FROZEN_RESULTS.glob(spec['glob'].format(setting='ALL'))),
         key=lambda path: path.stat().st_mtime,
         reverse=True,
     )
-    if not matches:
-        raise FileNotFoundError(f'No completed run found for {model}/{setting}.')
-    run_dir = matches[0]
-    detail_path = run_dir / spec['detail'].format(setting=setting)
-    summary_path = run_dir / 'experiment_metrics_summary.csv'
-    for path in [detail_path, summary_path]:
-        if not path.exists():
-            raise FileNotFoundError(path)
-    return run_dir, detail_path, summary_path
+    for run_dir in matches:
+        detail_path = run_dir / spec['detail'].format(setting=setting)
+        summary_path = run_dir / 'experiment_metrics_summary.csv'
+        if detail_path.is_file() and summary_path.is_file():
+            return run_dir, detail_path, summary_path
+    raise FileNotFoundError(f'No completed run found for {model}/{setting}.')
 
 def expected_calibration_error(y_true, y_prob, n_bins=N_ECE_BINS, sample_weight=None):
     y_true = np.asarray(y_true, dtype=int).ravel()
@@ -952,7 +944,11 @@ for model in MODEL_SPECS:
         confidence_intervals = {
             key: result[key] for key in result if key.endswith('_ci_low') or key.endswith('_ci_high')
         }
-        saved = pd.read_csv(pred['summary_path']).iloc[0]
+        saved_rows = pd.read_csv(pred['summary_path'])
+        saved_rows = saved_rows.loc[saved_rows['experiment'].eq(setting)]
+        if len(saved_rows) != 1:
+            raise ValueError(f'{model}/{setting}: expected one matching summary row.')
+        saved = saved_rows.iloc[0]
         for metric in ['scan_micro_auc', 'scan_macro_auc', 'interval_mae', 'interval_rmse']:
             if not np.isclose(round(metrics[metric], 4), round(float(saved[metric]), 4)):
                 raise AssertionError(f'{model}/{setting}: {metric} does not reproduce the saved result.')
