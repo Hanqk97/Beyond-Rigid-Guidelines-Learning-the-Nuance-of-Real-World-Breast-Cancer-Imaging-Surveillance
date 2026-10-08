@@ -182,7 +182,7 @@ BATCH_SIZE = 128
 EPOCHS = int(os.environ.get("MODEL_EPOCHS", "20"))
 LEARNING_RATE = 1e-3
 PATIENCE = 5
-SCAN_THRESHOLD = 0.5
+DEFAULT_SCAN_THRESHOLD = 0.5
 
 # Data-Hyperband tuning configuration. Each experiment setting gets its own best combination.
 # Score is higher-is-better: scan_auc - (interval_mape / 100) / (1 + interval_mape / 100).
@@ -520,13 +520,13 @@ def safe_multiclass_macro_curve(y_true, y_prob):
 
 
 def tune_scan_thresholds(y_true, y_prob):
-    thresholds = np.full(y_true.shape[1], 0.5, dtype=np.float32)
+    thresholds = np.full(y_true.shape[1], DEFAULT_SCAN_THRESHOLD, dtype=np.float32)
     for class_idx in range(y_true.shape[1]):
-        if y_true[:, class_idx].sum() == 0:
+        if np.unique(y_true[:, class_idx]).size < 2:
             continue
-        best_threshold = 0.5
+        best_threshold = DEFAULT_SCAN_THRESHOLD
         best_f1 = -1.0
-        for threshold in np.linspace(0.1, 0.9, 17):
+        for threshold in np.linspace(0.05, 0.95, 19):
             pred = (y_prob[:, class_idx] >= threshold).astype(int)
             score = f1_score(y_true[:, class_idx], pred, zero_division=0)
             if score > best_f1:
@@ -534,6 +534,15 @@ def tune_scan_thresholds(y_true, y_prob):
                 best_threshold = float(threshold)
         thresholds[class_idx] = best_threshold
     return thresholds
+
+
+def compute_scan_f1(pred, scan_thresholds):
+    y_true = np.asarray(pred["y_scan"], dtype=int)
+    y_pred = (np.asarray(pred["scan_probs"]) >= scan_thresholds).astype(int)
+    return {
+        "scan_micro_f1": float(f1_score(y_true.ravel(), y_pred.ravel(), zero_division=0)),
+        "scan_macro_f1": float(f1_score(y_true, y_pred, average="macro", zero_division=0)),
+    }
 
 
 # ## Experiment Functions
@@ -1234,7 +1243,7 @@ def collect_predictions(model, loader):
     }
 
 
-def build_prediction_detail_df(pred, interval_thresholds):
+def build_prediction_detail_df(pred, interval_thresholds, scan_thresholds):
     true_interval = np.asarray(pred["y_interval"], dtype=float)
     pred_interval = np.asarray(pred["interval_pred"], dtype=float)
     abs_error = np.abs(pred_interval - true_interval)
@@ -1254,7 +1263,8 @@ def build_prediction_detail_df(pred, interval_thresholds):
     for idx, scan_name in enumerate(SCAN_TYPE_NAMES):
         detail_df[f"y_scan_{scan_name}"] = pred["y_scan"][:, idx].astype(int)
         detail_df[f"p_scan_{scan_name}"] = pred["scan_probs"][:, idx]
-        detail_df[f"pred_scan_{scan_name}"] = (pred["scan_probs"][:, idx] >= SCAN_THRESHOLD).astype(int)
+        detail_df[f"pred_scan_{scan_name}"] = (pred["scan_probs"][:, idx] >= scan_thresholds[idx]).astype(int)
+        detail_df[f"threshold_{scan_name}"] = float(scan_thresholds[idx])
 
     return detail_df
 
@@ -2323,6 +2333,11 @@ for exp_idx, experiment in enumerate(EXPERIMENTS, start=1):
         evaluate_test=True,
         trial_id="best_final",
     )
+    result["scan_thresholds"] = tune_scan_thresholds(
+        result["val_pred"]["y_scan"], result["val_pred"]["scan_probs"]
+    )
+    result["val_metrics"].update(compute_scan_f1(result["val_pred"], result["scan_thresholds"]))
+    result["test_metrics"].update(compute_scan_f1(result["pred"], result["scan_thresholds"]))
     experiment_results.append(result)
     final_best_record = dict(best_row)
     final_best_record.update({f"test_{k}": v for k, v in result["test_metrics"].items()})
@@ -2356,7 +2371,20 @@ for result in experiment_results:
     print(f"[Runner] saving artifacts for {result['name']}")
     save_dataframe_artifact(result["history"], f"training_history_{result['name']}", title=f"training_history::{result['name']}", index=False)
 
-    detail_df = build_prediction_detail_df(result["pred"], result["interval_thresholds"])
+    scan_thresholds_df = pd.DataFrame({
+        "scan_type": SCAN_TYPE_NAMES,
+        "threshold": result["scan_thresholds"],
+    })
+    save_dataframe_artifact(scan_thresholds_df, f"validation_scan_thresholds_{result['name']}",
+                            title=f"validation_scan_thresholds::{result['name']}", index=False)
+    validation_detail_df = build_prediction_detail_df(
+        result["val_pred"], result["interval_thresholds"], result["scan_thresholds"]
+    )
+    save_dataframe_artifact(validation_detail_df, f"validation_prediction_detail_{result['name']}",
+                            title=f"validation_prediction_detail::{result['name']}", index=False)
+    detail_df = build_prediction_detail_df(
+        result["pred"], result["interval_thresholds"], result["scan_thresholds"]
+    )
     detail_stem = f"prediction_detail_{result['name']}"
     detail_csv_path, detail_txt_path = save_dataframe_artifact(
         detail_df,
@@ -2440,7 +2468,7 @@ plot_metadata = {
     "scan_type_names": SCAN_TYPE_NAMES,
     "interval_metric_names": ["MAE", "MAPE"],
     "interval_acc_thresholds": INTERVAL_ACC_THRESHOLDS,
-    "scan_threshold": SCAN_THRESHOLD,
+    "scan_threshold_selection": "Per-scan validation F1 on 0.05–0.95 in steps of 0.05; 0.5 fallback for a single-class validation target",
     "hyperband_score": HYPERBAND_SCORE_NAME,
     "hyperband_score_formula": "val_scan_micro_auc - ((val_interval_mape / 100.0) / (1.0 + (val_interval_mape / 100.0)))",
     "hyperband_resource": "patient_wise_train_fraction",

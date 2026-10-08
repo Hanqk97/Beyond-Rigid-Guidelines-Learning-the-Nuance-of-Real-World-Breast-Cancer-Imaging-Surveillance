@@ -1,0 +1,337 @@
+model,feature_set,scan_type,threshold,source
+Linear,DS,CT,0.3,archived_validation_selection
+Linear,DS,MRI,0.15,archived_validation_selection
+Linear,DS,PET,0.15,archived_validation_selection
+Linear,DS,ULTRASOUND,0.05,archived_validation_selection
+Linear,DS,XRAY,0.2,archived_validation_selection
+Linear,DS,MAMMO_TOMO,0.25,archived_validation_selection
+Linear,DS,NUCLEAR_MED,0.1,archived_validation_selection
+Linear,DSI,CT,0.3,archived_validation_selection
+Linear,DSI,MRI,0.15,archived_validation_selection
+Linear,DSI,PET,0.2,archived_validation_selection
+Linear,DSI,ULTRASOUND,0.1,archived_validation_selection
+Linear,DSI,XRAY,0.25,archived_validation_selection
+Linear,DSI,MAMMO_TOMO,0.25,archived_validation_selection
+Linear,DSI,NUCLEAR_MED,0.15,archived_validation_selection
+Linear,DSM,CT,0.3,archived_validation_selection
+Linear,DSM,MRI,0.15,archived_validation_selection
+Linear,DSM,PET,0.15,archived_validation_selection
+Linear,DSM,ULTRASOUND,0.05,archived_validation_selection
+Linear,DSM,XRAY,0.2,archived_validation_selection
+Linear,DSM,MAMMO_TOMO,0.25,archived_validation_selection
+Linear,DSM,NUCLEAR_MED,0.1,archived_validation_selection
+Linear,DSB,CT,0.3,archived_validation_selection
+Linear,DSB,MRI,0.15,archived_validation_selection
+Linear,DSB,PET,0.15,archived_validation_selection
+Linear,DSB,ULTRASOUND,0.05,archived_validation_selection
+Linear,DSB,XRAY,0.2,archived_validation_selection
+Linear,DSB,MAMMO_TOMO,0.25,archived_validation_selection
+Linear,DSB,NUCLEAR_MED,0.1,archived_validation_selection
+Linear,DSIM,CT,0.3,archived_validation_selection
+Linear,DSIM,MRI,0.15,archived_validation_selection
+Linear,DSIM,PET,0.2,archived_validation_selection
+Linear,DSIM,ULTRASOUND,0.1,archived_validation_selection
+Linear,DSIM,XRAY,0.25,archived_validation_selection
+Linear,DSIM,MAMMO_TOMO,0.3,archived_validation_selection
+Linear,DSIM,NUCLEAR_MED,0.15,archived_validation_selection
+Linear,DSIB,CT,0.3,archived_validation_selection
+Linear,DSIB,MRI,0.15,archived_validation_selection
+Linear,DSIB,PET,0.2,archived_validation_selection
+Linear,DSIB,ULTRASOUND,0.1,archived_validation_selection
+Linear,DSIB,XRAY,0.25,archived_validation_selection
+Linear,DSIB,MAMMO_TOMO,0.3,archived_validation_selection
+Linear,DSIB,NUCLEAR_MED,0.15,archived_validation_selection
+Linear,DSMB,CT,0.3,archived_validation_selection
+Linear,DSMB,MRI,0.15,archived_validation_selection
+Linear,DSMB,PET,0.15,archived_validation_selection
+Linear,DSMB,ULTRASOUND,0.1,archived_validation_selection
+Linear,DSMB,XRAY,0.2,archived_validation_selection
+Linear,DSMB,MAMMO_TOMO,0.25,archived_validation_selection
+Linear,DSMB,NUCLEAR_MED,0.1,archived_validation_selection
+Linear,DSIMB,CT,0.3,archived_validation_selection
+Linear,DSIMB,MRI,0.15,archived_validation_selection
+Linear,DSIMB,PET,0.2,archived_validation_selection
+Linear,DSIMB,ULTRASOUND,0.1,archived_validation_selection
+Linear,DSIMB,XRAY,0.25,archived_validation_selection
+Linear,DSIMB,MAMMO_TOMO,0.3,archived_validation_selection
+Linear,DSIMB,NUCLEAR_MED,0.15,archived_validation_selection
+XGBoost,DS,CT,0.25,archived_validation_selection
+XGBoost,DS,MRI,0.15,archived_validation_selection
+XGBoost,DS,PET,0.15,archived_validation_selection
+XGBoost,DS,ULTRASOUND,0.1,archived_validation_selection
+XGBoost,DS,XRAY,0.2,archived_validation_selection
+XGBoost,DS,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DS,NUCLEAR_MED,0.1,archived_validation_selection
+XGBoost,DSI,CT,0.3,archived_validation_selection
+XGBoost,DSI,MRI,0.2,archived_validation_selection
+XGBoost,DSI,PET,0.2,archived_validation_selection
+XGBoost,DSI,ULTRASOUND,0.15,archived_validation_selection
+XGBoost,DSI,XRAY,0.25,archived_validation_selection
+XGBoost,DSI,MAMMO_TOMO,0.3,archived_validation_selection
+XGBoost,DSI,NUCLEAR_MED,0.15,archived_validation_selection
+XGBoost,DSM,CT,0.25,archived_validation_selection
+XGBoost,DSM,MRI,0.15,archived_validation_selection
+XGBoost,DSM,PET,0.15,archived_validation_selection
+XGBoost,DSM,ULTRASOUND,0.05,archived_validation_selection
+XGBoost,DSM,XRAY,0.2,archived_validation_selection
+XGBoost,DSM,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DSM,NUCLEAR_MED,0.1,archived_validation_selection
+XGBoost,DSB,CT,0.3,archived_validation_selection
+XGBoost,DSB,MRI,0.15,archived_validation_selection
+XGBoost,DSB,PET,0.15,archived_validation_selection
+XGBoost,DSB,ULTRASOUND,0.05,archived_validation_selection
+XGBoost,DSB,XRAY,0.2,archived_validation_selection
+XGBoost,DSB,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DSB,NUCLEAR_MED,0.1,archived_validation_selection
+XGBoost,DSIM,CT,0.3,archived_validation_selection
+XGBoost,DSIM,MRI,0.2,archived_validation_selection
+XGBoost,DSIM,PET,0.2,archived_validation_selection
+XGBoost,DSIM,ULTRASOUND,0.1,archived_validation_selection
+XGBoost,DSIM,XRAY,0.2,archived_validation_selection
+XGBoost,DSIM,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DSIM,NUCLEAR_MED,0.15,archived_validation_selection
+XGBoost,DSIB,CT,0.3,archived_validation_selection
+XGBoost,DSIB,MRI,0.2,archived_validation_selection
+XGBoost,DSIB,PET,0.2,archived_validation_selection
+XGBoost,DSIB,ULTRASOUND,0.1,archived_validation_selection
+XGBoost,DSIB,XRAY,0.2,archived_validation_selection
+XGBoost,DSIB,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DSIB,NUCLEAR_MED,0.15,archived_validation_selection
+XGBoost,DSMB,CT,0.3,archived_validation_selection
+XGBoost,DSMB,MRI,0.15,archived_validation_selection
+XGBoost,DSMB,PET,0.15,archived_validation_selection
+XGBoost,DSMB,ULTRASOUND,0.05,archived_validation_selection
+XGBoost,DSMB,XRAY,0.2,archived_validation_selection
+XGBoost,DSMB,MAMMO_TOMO,0.25,archived_validation_selection
+XGBoost,DSMB,NUCLEAR_MED,0.1,archived_validation_selection
+XGBoost,DSIMB,CT,0.3,archived_validation_selection
+XGBoost,DSIMB,MRI,0.2,archived_validation_selection
+XGBoost,DSIMB,PET,0.2,archived_validation_selection
+XGBoost,DSIMB,ULTRASOUND,0.15,archived_validation_selection
+XGBoost,DSIMB,XRAY,0.2,archived_validation_selection
+XGBoost,DSIMB,MAMMO_TOMO,0.3,archived_validation_selection
+XGBoost,DSIMB,NUCLEAR_MED,0.15,archived_validation_selection
+MLP,DS,CT,0.3,archived_validation_selection
+MLP,DS,MRI,0.15,archived_validation_selection
+MLP,DS,PET,0.2,archived_validation_selection
+MLP,DS,ULTRASOUND,0.1,archived_validation_selection
+MLP,DS,XRAY,0.2,archived_validation_selection
+MLP,DS,MAMMO_TOMO,0.25,archived_validation_selection
+MLP,DS,NUCLEAR_MED,0.1,archived_validation_selection
+MLP,DSI,CT,0.3,archived_validation_selection
+MLP,DSI,MRI,0.2,archived_validation_selection
+MLP,DSI,PET,0.25,archived_validation_selection
+MLP,DSI,ULTRASOUND,0.15,archived_validation_selection
+MLP,DSI,XRAY,0.25,archived_validation_selection
+MLP,DSI,MAMMO_TOMO,0.35,archived_validation_selection
+MLP,DSI,NUCLEAR_MED,0.2,archived_validation_selection
+MLP,DSM,CT,0.3,archived_validation_selection
+MLP,DSM,MRI,0.15,archived_validation_selection
+MLP,DSM,PET,0.2,archived_validation_selection
+MLP,DSM,ULTRASOUND,0.1,archived_validation_selection
+MLP,DSM,XRAY,0.2,archived_validation_selection
+MLP,DSM,MAMMO_TOMO,0.35,archived_validation_selection
+MLP,DSM,NUCLEAR_MED,0.1,archived_validation_selection
+MLP,DSB,CT,0.3,archived_validation_selection
+MLP,DSB,MRI,0.15,archived_validation_selection
+MLP,DSB,PET,0.2,archived_validation_selection
+MLP,DSB,ULTRASOUND,0.1,archived_validation_selection
+MLP,DSB,XRAY,0.2,archived_validation_selection
+MLP,DSB,MAMMO_TOMO,0.3,archived_validation_selection
+MLP,DSB,NUCLEAR_MED,0.1,archived_validation_selection
+MLP,DSIM,CT,0.3,archived_validation_selection
+MLP,DSIM,MRI,0.2,archived_validation_selection
+MLP,DSIM,PET,0.3,archived_validation_selection
+MLP,DSIM,ULTRASOUND,0.15,archived_validation_selection
+MLP,DSIM,XRAY,0.25,archived_validation_selection
+MLP,DSIM,MAMMO_TOMO,0.4,archived_validation_selection
+MLP,DSIM,NUCLEAR_MED,0.2,archived_validation_selection
+MLP,DSIB,CT,0.3,archived_validation_selection
+MLP,DSIB,MRI,0.2,archived_validation_selection
+MLP,DSIB,PET,0.25,archived_validation_selection
+MLP,DSIB,ULTRASOUND,0.15,archived_validation_selection
+MLP,DSIB,XRAY,0.2,archived_validation_selection
+MLP,DSIB,MAMMO_TOMO,0.4,archived_validation_selection
+MLP,DSIB,NUCLEAR_MED,0.2,archived_validation_selection
+MLP,DSMB,CT,0.3,archived_validation_selection
+MLP,DSMB,MRI,0.15,archived_validation_selection
+MLP,DSMB,PET,0.2,archived_validation_selection
+MLP,DSMB,ULTRASOUND,0.1,archived_validation_selection
+MLP,DSMB,XRAY,0.2,archived_validation_selection
+MLP,DSMB,MAMMO_TOMO,0.25,archived_validation_selection
+MLP,DSMB,NUCLEAR_MED,0.1,archived_validation_selection
+MLP,DSIMB,CT,0.3,archived_validation_selection
+MLP,DSIMB,MRI,0.2,archived_validation_selection
+MLP,DSIMB,PET,0.25,archived_validation_selection
+MLP,DSIMB,ULTRASOUND,0.15,archived_validation_selection
+MLP,DSIMB,XRAY,0.25,archived_validation_selection
+MLP,DSIMB,MAMMO_TOMO,0.45,archived_validation_selection
+MLP,DSIMB,NUCLEAR_MED,0.15,archived_validation_selection
+GRU,DS,CT,0.3,rerun_validation_selection
+GRU,DS,MRI,0.15,rerun_validation_selection
+GRU,DS,PET,0.15,rerun_validation_selection
+GRU,DS,ULTRASOUND,0.05,rerun_validation_selection
+GRU,DS,XRAY,0.15,rerun_validation_selection
+GRU,DS,MAMMO_TOMO,0.2,rerun_validation_selection
+GRU,DS,NUCLEAR_MED,0.1,rerun_validation_selection
+GRU,DSI,CT,0.3,rerun_validation_selection
+GRU,DSI,MRI,0.2,rerun_validation_selection
+GRU,DSI,PET,0.2,rerun_validation_selection
+GRU,DSI,ULTRASOUND,0.1,rerun_validation_selection
+GRU,DSI,XRAY,0.25,rerun_validation_selection
+GRU,DSI,MAMMO_TOMO,0.3,rerun_validation_selection
+GRU,DSI,NUCLEAR_MED,0.15,rerun_validation_selection
+GRU,DSM,CT,0.25,rerun_validation_selection
+GRU,DSM,MRI,0.15,rerun_validation_selection
+GRU,DSM,PET,0.15,rerun_validation_selection
+GRU,DSM,ULTRASOUND,0.1,rerun_validation_selection
+GRU,DSM,XRAY,0.15,rerun_validation_selection
+GRU,DSM,MAMMO_TOMO,0.2,rerun_validation_selection
+GRU,DSM,NUCLEAR_MED,0.1,rerun_validation_selection
+GRU,DSB,CT,0.25,rerun_validation_selection
+GRU,DSB,MRI,0.15,rerun_validation_selection
+GRU,DSB,PET,0.15,rerun_validation_selection
+GRU,DSB,ULTRASOUND,0.05,rerun_validation_selection
+GRU,DSB,XRAY,0.2,rerun_validation_selection
+GRU,DSB,MAMMO_TOMO,0.25,rerun_validation_selection
+GRU,DSB,NUCLEAR_MED,0.1,rerun_validation_selection
+GRU,DSIM,CT,0.3,rerun_validation_selection
+GRU,DSIM,MRI,0.15,rerun_validation_selection
+GRU,DSIM,PET,0.2,rerun_validation_selection
+GRU,DSIM,ULTRASOUND,0.1,rerun_validation_selection
+GRU,DSIM,XRAY,0.25,rerun_validation_selection
+GRU,DSIM,MAMMO_TOMO,0.35,rerun_validation_selection
+GRU,DSIM,NUCLEAR_MED,0.15,rerun_validation_selection
+GRU,DSIB,CT,0.3,rerun_validation_selection
+GRU,DSIB,MRI,0.2,rerun_validation_selection
+GRU,DSIB,PET,0.25,rerun_validation_selection
+GRU,DSIB,ULTRASOUND,0.15,rerun_validation_selection
+GRU,DSIB,XRAY,0.25,rerun_validation_selection
+GRU,DSIB,MAMMO_TOMO,0.3,rerun_validation_selection
+GRU,DSIB,NUCLEAR_MED,0.15,rerun_validation_selection
+GRU,DSMB,CT,0.25,rerun_validation_selection
+GRU,DSMB,MRI,0.15,rerun_validation_selection
+GRU,DSMB,PET,0.15,rerun_validation_selection
+GRU,DSMB,ULTRASOUND,0.05,rerun_validation_selection
+GRU,DSMB,XRAY,0.2,rerun_validation_selection
+GRU,DSMB,MAMMO_TOMO,0.2,rerun_validation_selection
+GRU,DSMB,NUCLEAR_MED,0.1,rerun_validation_selection
+GRU,DSIMB,CT,0.3,rerun_validation_selection
+GRU,DSIMB,MRI,0.2,rerun_validation_selection
+GRU,DSIMB,PET,0.2,rerun_validation_selection
+GRU,DSIMB,ULTRASOUND,0.15,rerun_validation_selection
+GRU,DSIMB,XRAY,0.25,rerun_validation_selection
+GRU,DSIMB,MAMMO_TOMO,0.4,rerun_validation_selection
+GRU,DSIMB,NUCLEAR_MED,0.15,rerun_validation_selection
+LSTM,DS,CT,0.3,rerun_validation_selection
+LSTM,DS,MRI,0.15,rerun_validation_selection
+LSTM,DS,PET,0.15,rerun_validation_selection
+LSTM,DS,ULTRASOUND,0.05,rerun_validation_selection
+LSTM,DS,XRAY,0.2,rerun_validation_selection
+LSTM,DS,MAMMO_TOMO,0.2,rerun_validation_selection
+LSTM,DS,NUCLEAR_MED,0.1,rerun_validation_selection
+LSTM,DSI,CT,0.3,rerun_validation_selection
+LSTM,DSI,MRI,0.2,rerun_validation_selection
+LSTM,DSI,PET,0.25,rerun_validation_selection
+LSTM,DSI,ULTRASOUND,0.1,rerun_validation_selection
+LSTM,DSI,XRAY,0.25,rerun_validation_selection
+LSTM,DSI,MAMMO_TOMO,0.35,rerun_validation_selection
+LSTM,DSI,NUCLEAR_MED,0.15,rerun_validation_selection
+LSTM,DSM,CT,0.3,rerun_validation_selection
+LSTM,DSM,MRI,0.15,rerun_validation_selection
+LSTM,DSM,PET,0.15,rerun_validation_selection
+LSTM,DSM,ULTRASOUND,0.05,rerun_validation_selection
+LSTM,DSM,XRAY,0.2,rerun_validation_selection
+LSTM,DSM,MAMMO_TOMO,0.2,rerun_validation_selection
+LSTM,DSM,NUCLEAR_MED,0.1,rerun_validation_selection
+LSTM,DSB,CT,0.25,rerun_validation_selection
+LSTM,DSB,MRI,0.15,rerun_validation_selection
+LSTM,DSB,PET,0.15,rerun_validation_selection
+LSTM,DSB,ULTRASOUND,0.05,rerun_validation_selection
+LSTM,DSB,XRAY,0.2,rerun_validation_selection
+LSTM,DSB,MAMMO_TOMO,0.2,rerun_validation_selection
+LSTM,DSB,NUCLEAR_MED,0.1,rerun_validation_selection
+LSTM,DSIM,CT,0.3,rerun_validation_selection
+LSTM,DSIM,MRI,0.15,rerun_validation_selection
+LSTM,DSIM,PET,0.2,rerun_validation_selection
+LSTM,DSIM,ULTRASOUND,0.1,rerun_validation_selection
+LSTM,DSIM,XRAY,0.25,rerun_validation_selection
+LSTM,DSIM,MAMMO_TOMO,0.35,rerun_validation_selection
+LSTM,DSIM,NUCLEAR_MED,0.15,rerun_validation_selection
+LSTM,DSIB,CT,0.3,rerun_validation_selection
+LSTM,DSIB,MRI,0.15,rerun_validation_selection
+LSTM,DSIB,PET,0.25,rerun_validation_selection
+LSTM,DSIB,ULTRASOUND,0.1,rerun_validation_selection
+LSTM,DSIB,XRAY,0.2,rerun_validation_selection
+LSTM,DSIB,MAMMO_TOMO,0.3,rerun_validation_selection
+LSTM,DSIB,NUCLEAR_MED,0.15,rerun_validation_selection
+LSTM,DSMB,CT,0.25,rerun_validation_selection
+LSTM,DSMB,MRI,0.15,rerun_validation_selection
+LSTM,DSMB,PET,0.15,rerun_validation_selection
+LSTM,DSMB,ULTRASOUND,0.05,rerun_validation_selection
+LSTM,DSMB,XRAY,0.15,rerun_validation_selection
+LSTM,DSMB,MAMMO_TOMO,0.2,rerun_validation_selection
+LSTM,DSMB,NUCLEAR_MED,0.1,rerun_validation_selection
+LSTM,DSIMB,CT,0.35,rerun_validation_selection
+LSTM,DSIMB,MRI,0.15,rerun_validation_selection
+LSTM,DSIMB,PET,0.25,rerun_validation_selection
+LSTM,DSIMB,ULTRASOUND,0.1,rerun_validation_selection
+LSTM,DSIMB,XRAY,0.25,rerun_validation_selection
+LSTM,DSIMB,MAMMO_TOMO,0.3,rerun_validation_selection
+LSTM,DSIMB,NUCLEAR_MED,0.15,rerun_validation_selection
+Decoder-only Transformer,DS,CT,0.25,rerun_validation_selection
+Decoder-only Transformer,DS,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DS,PET,0.15,rerun_validation_selection
+Decoder-only Transformer,DS,ULTRASOUND,0.05,rerun_validation_selection
+Decoder-only Transformer,DS,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DS,MAMMO_TOMO,0.2,rerun_validation_selection
+Decoder-only Transformer,DS,NUCLEAR_MED,0.1,rerun_validation_selection
+Decoder-only Transformer,DSI,CT,0.3,rerun_validation_selection
+Decoder-only Transformer,DSI,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DSI,PET,0.2,rerun_validation_selection
+Decoder-only Transformer,DSI,ULTRASOUND,0.15,rerun_validation_selection
+Decoder-only Transformer,DSI,XRAY,0.25,rerun_validation_selection
+Decoder-only Transformer,DSI,MAMMO_TOMO,0.35,rerun_validation_selection
+Decoder-only Transformer,DSI,NUCLEAR_MED,0.2,rerun_validation_selection
+Decoder-only Transformer,DSM,CT,0.25,rerun_validation_selection
+Decoder-only Transformer,DSM,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DSM,PET,0.15,rerun_validation_selection
+Decoder-only Transformer,DSM,ULTRASOUND,0.05,rerun_validation_selection
+Decoder-only Transformer,DSM,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DSM,MAMMO_TOMO,0.2,rerun_validation_selection
+Decoder-only Transformer,DSM,NUCLEAR_MED,0.1,rerun_validation_selection
+Decoder-only Transformer,DSB,CT,0.25,rerun_validation_selection
+Decoder-only Transformer,DSB,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DSB,PET,0.15,rerun_validation_selection
+Decoder-only Transformer,DSB,ULTRASOUND,0.1,rerun_validation_selection
+Decoder-only Transformer,DSB,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DSB,MAMMO_TOMO,0.2,rerun_validation_selection
+Decoder-only Transformer,DSB,NUCLEAR_MED,0.1,rerun_validation_selection
+Decoder-only Transformer,DSIM,CT,0.3,rerun_validation_selection
+Decoder-only Transformer,DSIM,MRI,0.2,rerun_validation_selection
+Decoder-only Transformer,DSIM,PET,0.25,rerun_validation_selection
+Decoder-only Transformer,DSIM,ULTRASOUND,0.15,rerun_validation_selection
+Decoder-only Transformer,DSIM,XRAY,0.25,rerun_validation_selection
+Decoder-only Transformer,DSIM,MAMMO_TOMO,0.3,rerun_validation_selection
+Decoder-only Transformer,DSIM,NUCLEAR_MED,0.15,rerun_validation_selection
+Decoder-only Transformer,DSIB,CT,0.35,rerun_validation_selection
+Decoder-only Transformer,DSIB,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DSIB,PET,0.2,rerun_validation_selection
+Decoder-only Transformer,DSIB,ULTRASOUND,0.1,rerun_validation_selection
+Decoder-only Transformer,DSIB,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DSIB,MAMMO_TOMO,0.35,rerun_validation_selection
+Decoder-only Transformer,DSIB,NUCLEAR_MED,0.15,rerun_validation_selection
+Decoder-only Transformer,DSMB,CT,0.25,rerun_validation_selection
+Decoder-only Transformer,DSMB,MRI,0.15,rerun_validation_selection
+Decoder-only Transformer,DSMB,PET,0.15,rerun_validation_selection
+Decoder-only Transformer,DSMB,ULTRASOUND,0.05,rerun_validation_selection
+Decoder-only Transformer,DSMB,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DSMB,MAMMO_TOMO,0.2,rerun_validation_selection
+Decoder-only Transformer,DSMB,NUCLEAR_MED,0.1,rerun_validation_selection
+Decoder-only Transformer,DSIMB,CT,0.3,rerun_validation_selection
+Decoder-only Transformer,DSIMB,MRI,0.2,rerun_validation_selection
+Decoder-only Transformer,DSIMB,PET,0.25,rerun_validation_selection
+Decoder-only Transformer,DSIMB,ULTRASOUND,0.15,rerun_validation_selection
+Decoder-only Transformer,DSIMB,XRAY,0.2,rerun_validation_selection
+Decoder-only Transformer,DSIMB,MAMMO_TOMO,0.35,rerun_validation_selection
+Decoder-only Transformer,DSIMB,NUCLEAR_MED,0.15,rerun_validation_selection

@@ -27,7 +27,7 @@ FIXED_POLICY = {
     "MAMMO_TOMO -> MAMMO_TOMO": "12-month guideline",
 }
 SERIES_STYLE = {
-    "GRU-DSIMB": {"color": "#1b9e77", "marker": "o"},
+    "GRU-DSIB": {"color": "#1b9e77", "marker": "o"},
     "Nearest guideline": {"color": "#7570b3", "marker": "D"},
     "Overall guideline": {"color": "#4d4d4d", "marker": "X"},
     "6-month guideline": {"color": "#d95f02", "marker": "s"},
@@ -36,7 +36,7 @@ SERIES_STYLE = {
     "Average": {"color": "#e7298a", "marker": "v"},
 }
 LABEL_OFFSET = {
-    "GRU-DSIMB": -0.20, "Nearest guideline": 0.21, "Overall guideline": 0.21,
+    "GRU-DSIB": -0.20, "Nearest guideline": 0.21, "Overall guideline": 0.21,
     "6-month guideline": -0.20, "12-month guideline": 0.21,
     "24-month guideline": -0.20,
 }
@@ -50,7 +50,7 @@ def load_guideline_rows(path: Path) -> list[dict]:
         proposed = part.loc[part["model"].str.contains("ours", case=False, na=False)].iloc[0]
         guideline = part.loc[part["model"].eq("Guideline")].iloc[0]
         points = {
-            "GRU-DSIMB": {"mae": float(proposed["MAE"]), "rmse": float(proposed["RMSE"])}
+            "GRU-DSIB": {"mae": float(proposed["MAE"]), "rmse": float(proposed["RMSE"])}
         }
         if transition in FIXED_POLICY:
             points[FIXED_POLICY[transition]] = {
@@ -83,7 +83,7 @@ def load_average_rows(path: Path) -> list[dict]:
             "transition": str(scan_type),
             "n": int(proposed["n"]),
             "points": {
-                "GRU-DSIMB": {"mae": float(proposed["MAE"]), "rmse": float(proposed["RMSE"])},
+                "GRU-DSIB": {"mae": float(proposed["MAE"]), "rmse": float(proposed["RMSE"])},
                 "Average": {"mae": float(average["MAE"]), "rmse": float(average["RMSE"])},
             },
         })
@@ -122,18 +122,18 @@ def draw_comparison_panel(ax, rows, metric, xlabel, is_guideline, show_ylabels=T
             x_range = x_max - x_min
             near_left_axis = value < x_min + 0.14 * x_range
             near_right_axis = value > x_min + 0.88 * x_range
-            place_left = (name == "GRU-DSIMB" and not near_left_axis) or near_right_axis
+            place_left = (name == "GRU-DSIB" and not near_left_axis) or near_right_axis
             offset_y = -0.24 if point_index % 2 == 0 else 0.25
             if row["transition"] in {"ULTRASOUND -> ULTRASOUND", "MRI -> MRI", "Overall"}:
                 offset_y = LABEL_OFFSET.get(name, offset_y)
             if row["transition"] == "MRI -> MAMMO_TOMO":
-                if name == "GRU-DSIMB":
+                if name == "GRU-DSIB":
                     offset_y = -0.32
                 elif name == "6-month guideline":
                     offset_y = 0.32
             text_x = value - label_dx if place_left else value + label_dx
             text_ha = "right" if place_left else "left"
-            if is_guideline and name == "GRU-DSIMB":
+            if is_guideline and name == "GRU-DSIB":
                 if row["transition"] == "MRI -> MRI":
                     text_x, text_ha = value + 1.2, "left"
                 elif row["transition"] == "MRI -> MAMMO_TOMO":
@@ -167,7 +167,7 @@ def make_vertical_figure(guideline_rows, average_rows):
     draw_comparison_panel(axes[0, 1], guideline_rows, "rmse", "RMSE (months)", True, False)
     draw_comparison_panel(axes[1, 0], average_rows, "mae", "MAE (months)", False, True)
     draw_comparison_panel(axes[1, 1], average_rows, "rmse", "RMSE (months)", False, False)
-    names = ["GRU-DSIMB", "Nearest guideline", "Overall guideline", "6-month guideline",
+    names = ["GRU-DSIB", "Nearest guideline", "Overall guideline", "6-month guideline",
              "12-month guideline", "24-month guideline", "Average"]
     fig.legend(handles=legend_handles(names), loc="upper center", ncol=4, frameon=False,
                fontsize=8.0, columnspacing=1.1, handletextpad=0.3)
