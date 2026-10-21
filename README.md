@@ -4,6 +4,8 @@ This repository accompanies the manuscript **Beyond Rigid Guidelines: Learning t
 
 The data source is **ConcertAI RWD360**, a licensed real-world oncology database. The underlying clinical data and derived patient-level datasets cannot be shared under the data license. This repository provides model-implementation and analysis scripts, input schemas, selected hyperparameters, and manuscript-level aggregate results. Users must obtain their own authorized data access to run preprocessing, training, and patient-level evaluation. See [Data availability](DATA_AVAILABILITY.md).
 
+Overall, our analysis shows predictable associations between patient status features and upcoming oncology surveillance actions (i.e., scanning modality and interval), which could help characterize real-world practice variation and support future decision-making.
+
 ## Authors
 
 Hanqi Chen, Anthony Girard, Arsh Shah, Rou-Zhen Chen, Winnie Lau, Ravi B. Parikh, Paramita Chatterjee, and Shengpu Tang.
@@ -12,7 +14,11 @@ Hanqi Chen, Anthony Girard, Arsh Shah, Rou-Zhen Chen, Winnie Lau, Ravi B. Parikh
 
 ## Ethics and IRB
 
-The study used de-identified clinical records from ConcertAI RWD360. **IRB protocol number: [IRB NUMBER TO BE ADDED].**
+The study used de-identified clinical records from ConcertAI RWD360. This study was approved by the Emory University Institutional Review Board (IRB), protocol **2025P009048**.
+
+## Acknowledgments
+
+This work was supported by the Emory URC Research Award and the Disruptive Discovery Seed Program by Emory University's Office of the Provost (to Shengpu Tang). The data resources used in this study were supported in part by Developmental Funds from the Winship Cancer Institute of Emory University under award number P30CA138292. The content of this document is that of the authors and should not be interpreted as necessarily representing the views of the funding sources.
 
 ## Run the analysis notebook without clinical data
 
